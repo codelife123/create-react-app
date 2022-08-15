@@ -1,17 +1,17 @@
 import './App.css';
-import React from 'react';
 import ComingSoon from './ComingSoon.js';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
+import React, { useState, useEffect } from 'react';
 
 function App() {
   const setGA = () => {
     ReactGA.initialize('G-485S81XQ4W');
-    ReactGA.pageview('/');
+    ReactGA.send({ hitType: 'pageview', page: '/' });
   };
 
-  function componentDidMount() {
-    this.setGA();
-  }
+  useEffect(() => {
+    setGA();
+  });
 
   return (
     <div className="App">
