@@ -10,7 +10,7 @@ function ComingSoon() {
           We're creating something awesome 🤩🤩. Please subscribe to get
           notified when it's ready!
         </p>
-        <p>&mdash; WhosAlive Team</p>
+        <p>&mdash; WhoisAlive Team</p>
       </div>
     </article>
   );
