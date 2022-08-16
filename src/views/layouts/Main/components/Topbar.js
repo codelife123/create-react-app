@@ -26,7 +26,7 @@ const Topbar = ({
       width={'100%'}
     >
       <Box display={'flex'} alignItems={'center'}>
-        <Box marginRight={{ xs: 1, sm: 2 }}>
+        <Box display={'none'} marginRight={{ xs: 1, sm: 2 }}>
           <IconButton onClick={onSidebarOpen} aria-label="Menu">
             <MenuIcon />
           </IconButton>
@@ -46,7 +46,7 @@ const Topbar = ({
       </Box>
       <Box display="flex" alignItems={'center'}>
         <Box
-          display={'flex'}
+          display={'none'}
           padding={1}
           borderRadius={8}
           bgcolor={theme.palette.alternate.main}

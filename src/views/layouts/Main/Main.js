@@ -8,7 +8,6 @@ import Box from '@mui/material/Box';
 import Slide from '@mui/material/Slide';
 import { Topbar, Sidebar, Footer } from './components';
 import Container from '../../common/Container';
-import { pages } from '../navigation';
 
 const HideOnScroll = ({ children }) => {
   const trigger = useScrollTrigger();
