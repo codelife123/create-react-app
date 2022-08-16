@@ -20,8 +20,50 @@ const ComingSoon = () => {
     defaultMatches: true,
   });
 
-  const [minutes, setMinutes] = useState(30);
-  const [seconds, setSeconds] = useState(60);
+  const getDuration = (t0, t1) => {
+    let d = new Date(t1) - new Date(t0);
+    let weekdays = Math.floor(d / 1000 / 60 / 60 / 24 / 7);
+    let days = Math.floor(d / 1000 / 60 / 60 / 24 - weekdays * 7);
+    let hours = Math.floor(d / 1000 / 60 / 60 - weekdays * 7 * 24 - days * 24);
+    let minutes = Math.floor(
+      d / 1000 / 60 - weekdays * 7 * 24 * 60 - days * 24 * 60 - hours * 60
+    );
+    let seconds = Math.floor(
+      d / 1000 -
+        weekdays * 7 * 24 * 60 * 60 -
+        days * 24 * 60 * 60 -
+        hours * 60 * 60 -
+        minutes * 60
+    );
+    let milliseconds = Math.floor(
+      d -
+        weekdays * 7 * 24 * 60 * 60 * 1000 -
+        days * 24 * 60 * 60 * 1000 -
+        hours * 60 * 60 * 1000 -
+        minutes * 60 * 1000 -
+        seconds * 1000
+    );
+
+    days = days + 7 * weekdays;
+
+    let t = {};
+    ['weekdays', 'days', 'hours', 'minutes', 'seconds', 'milliseconds'].forEach(
+      (q) => {
+        if (eval(q) > 0) {
+          t[q] = eval(q);
+        }
+      }
+    );
+    return t;
+  };
+
+  const estimateDate = '2022-10-01';
+  const gap = getDuration(new Date(), new Date(estimateDate));
+
+  const [days, setDays] = useState(gap['days']);
+  const [hours, setHours] = useState(gap['hours']);
+  const [minutes, setMinutes] = useState(gap['minutes']);
+  const [seconds, setSeconds] = useState(gap['seconds']);
   useEffect(() => {
     let myInterval = setInterval(() => {
       if (seconds > 0) {
@@ -75,14 +117,14 @@ const ComingSoon = () => {
                 gutterBottom
                 sx={{ fontWeight: 700 }}
               >
-                We are coming soon
+                We are launching soon
               </Typography>
               <Typography
                 component="p"
                 color="textSecondary"
                 align={isMd ? 'left' : 'center'}
               >
-                Our website is under construction.
+                We're creating something awesome.
                 <br />
                 We'll be here soon with our new awesome site, subscribe to be
                 notified.
@@ -103,7 +145,7 @@ const ComingSoon = () => {
                     sx={{ fontWeight: 700 }}
                     color="primary"
                   >
-                    13
+                    {days}
                   </Typography>
                   <Typography>Days</Typography>
                 </Box>
@@ -117,7 +159,7 @@ const ComingSoon = () => {
                     sx={{ fontWeight: 700 }}
                     color="primary"
                   >
-                    09
+                    {hours}
                   </Typography>
                   <Typography>Hours</Typography>
                 </Box>
@@ -153,7 +195,7 @@ const ComingSoon = () => {
               <form noValidate autoComplete="off">
                 <Box
                   display="flex"
-                  flexDirection={{ xs: 'column', sm: 'row' }}
+                  flexDirection={{ xs: 'column', sm: 'column' }}
                   alignItems={{ xs: 'stretched', sm: 'flex-start' }}
                 >
                   <Box
@@ -164,15 +206,17 @@ const ComingSoon = () => {
                     color="primary"
                     fullWidth
                     height={54}
+                    marginBottom={2}
                   />
+
                   <Box
                     component={Button}
                     variant="contained"
                     color="primary"
                     size="large"
                     height={54}
-                    marginTop={{ xs: 2, sm: 0 }}
-                    marginLeft={{ sm: 2 }}
+                    marginTop={{ xs: 2, sm: 2 }}
+                    fullWidth
                   >
                     Subscribe
                   </Box>
@@ -187,9 +231,6 @@ const ComingSoon = () => {
                 </IconButton>
                 <IconButton aria-label="instagram">
                   <InstagramIcon />
-                </IconButton>
-                <IconButton aria-label="github">
-                  <GitHubIcon />
                 </IconButton>
               </Box>
             </Box>
