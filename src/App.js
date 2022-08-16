@@ -1,5 +1,10 @@
 import './App.css';
-import ComingSoon from './ComingSoon.js';
+// import ComingSoon from './ComingSoon.js';
+import { ComingSoon as ComingSoonView } from './views/supportPages';
+import getTheme from './views/theme';
+import palettes from './views/common/paletteTypes';
+import { ThemeProvider } from '@mui/material/styles';
+
 import ReactGA from 'react-ga4';
 import React, { useState, useEffect } from 'react';
 
@@ -15,7 +20,9 @@ function App() {
 
   return (
     <div className="App">
-      <ComingSoon />
+      <ThemeProvider theme={getTheme('dark', 'green')}>
+        <ComingSoonView />
+      </ThemeProvider>
     </div>
   );
 }

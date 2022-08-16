@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useTheme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import Container from 'common/Container';
-import TeamWorkingIllustration from 'svg/illustrations/TeamWorking';
+import { useTheme } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import Container from '../../common/Container';
+import TeamWorkingIllustration from '../../svg/illustrations/TeamWorking';
 
 const ComingSoon = () => {
   const theme = useTheme();
