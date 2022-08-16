@@ -4,6 +4,8 @@ import { ComingSoon as ComingSoonView } from './views/supportPages';
 import getTheme from './views/theme';
 import palettes from './views/common/paletteTypes';
 import { ThemeProvider } from '@mui/material/styles';
+import WithLayout from './WithLayout.js';
+import { Main as MainLayout } from './views/layouts';
 
 import ReactGA from 'react-ga4';
 import React, { useState, useEffect } from 'react';
@@ -18,13 +20,7 @@ function App() {
     setGA();
   });
 
-  return (
-    <div bgcolor={'alternate.main'} className="App">
-      <ThemeProvider theme={getTheme('light', 'green')}>
-        <ComingSoonView themeMode={'light'} paletteType={'green'} />
-      </ThemeProvider>
-    </div>
-  );
+  return <WithLayout component={ComingSoonView} layout={MainLayout} />;
 }
 
 export default App;

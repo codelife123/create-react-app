@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 import { ThemeProvider } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import CssBaseline from '@mui/material/CssBaseline';
-import getTheme from 'theme';
-import palettes from 'common/paletteTypes';
+import getTheme from './views/theme';
+import palettes from './views/common/paletteTypes';
 import AOS from 'aos';
 
 export const useDarkMode = () => {
-  const [themeMode, setTheme] = useState('light');
+  const [themeMode, setTheme] = useState('dark');
   const [paletteType, setPalette] = useState(palettes[0]);
   const [mountedComponent, setMountedComponent] = useState(false);
 
   const setMode = (mode) => {
+    console.log('setting themeMode ' + mode);
     window.localStorage.setItem('themeMode', mode);
     setTheme(mode);
   };
