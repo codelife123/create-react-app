@@ -11,7 +11,7 @@ const palette = (themeMode = 'light', paletteType = 'green') => {
   //   return themeMode === 'dark' ? darkOrange : lightOrange;
   // }
 
-  return themeMode === 'dark' ? darkGreen : darkGreen;
+  return themeMode === 'dark' ? darkGreen : lightGreen;
 };
 
 export default palette;

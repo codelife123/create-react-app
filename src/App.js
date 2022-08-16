@@ -20,8 +20,8 @@ function App() {
 
   return (
     <div bgcolor={'alternate.main'} className="App">
-      <ThemeProvider theme={getTheme('dark', 'green')}>
-        <ComingSoonView themeMode={'dark'} paletteType={'green'} />
+      <ThemeProvider theme={getTheme('light', 'green')}>
+        <ComingSoonView themeMode={'light'} paletteType={'green'} />
       </ThemeProvider>
     </div>
   );
