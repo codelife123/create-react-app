@@ -27,42 +27,7 @@ const Footer = () => (
         >
           <WebbeeLogo height={'100%'} width={'100%'} />
         </Box>
-        <Box display="flex" flexWrap={'wrap'} alignItems={'center'}>
-          <Box marginTop={1} marginRight={2}>
-            <Link
-              underline="none"
-              component="a"
-              href="/"
-              color="textPrimary"
-              variant={'subtitle2'}
-            >
-              Home
-            </Link>
-          </Box>
-          <Box marginTop={1} marginRight={2}>
-            <Link
-              underline="none"
-              component="a"
-              href="/docs-introduction"
-              color="textPrimary"
-              variant={'subtitle2'}
-            >
-              Documentation
-            </Link>
-          </Box>
-          <Box marginTop={1}>
-            <Button
-              variant="outlined"
-              color="primary"
-              component="a"
-              target="blank"
-              href="https://material-ui.com/store/items/webbee-landing-page/"
-              size="small"
-            >
-              Purchase now
-            </Button>
-          </Box>
-        </Box>
+        <Box display="flex" flexWrap={'wrap'} alignItems={'center'}></Box>
       </Box>
     </Grid>
     <Grid item xs={12}>

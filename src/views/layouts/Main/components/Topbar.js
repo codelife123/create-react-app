@@ -124,35 +124,10 @@ const Topbar = ({
             )}
           </IconButton>
         </Box>
-        <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
-          <Box>
-            <Link underline="none" component="a" href="/" color="textPrimary">
-              Home
-            </Link>
-          </Box>
-          <Box marginX={2}>
-            <Link
-              underline="none"
-              component="a"
-              href="/docs-introduction"
-              color="textPrimary"
-            >
-              Documentation
-            </Link>
-          </Box>
-          <Box>
-            <Button
-              variant="contained"
-              color="primary"
-              component="a"
-              target="blank"
-              href="https://material-ui.com/store/items/webbee-landing-page/"
-              size="large"
-            >
-              Purchase now
-            </Button>
-          </Box>
-        </Box>
+        <Box
+          sx={{ display: { xs: 'none', md: 'flex' } }}
+          alignItems={'center'}
+        ></Box>
       </Box>
     </Box>
   );
