@@ -35,7 +35,7 @@ const ComingSoon = () => {
   console.log(errors);
 
   const onSubmit = (data) => {
-    const url = 'http://whoisalive.herokuapp.com/waitingList';
+    const url = 'https://whoisalive.herokuapp.com/waitingList';
     console.log(data.Email);
     const options = {
       method: 'POST',
