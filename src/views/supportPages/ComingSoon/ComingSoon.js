@@ -23,6 +23,9 @@ const ComingSoon = () => {
     defaultMatches: true,
   });
 
+  const vertical = 'bottom';
+  const horizontal = 'left';
+
   const {
     register,
     handleSubmit,
@@ -161,7 +164,12 @@ const ComingSoon = () => {
               </Box>
             </Box>
 
-            <Snackbar open={open} autoHideDuration={6000}>
+            <Snackbar
+              open={open}
+              autoHideDuration={6000}
+              key={'bottom' + 'left'}
+              anchorOrigin={{ vertical, horizontal }}
+            >
               <Alert
                 onClose={handleClose}
                 severity="success"
