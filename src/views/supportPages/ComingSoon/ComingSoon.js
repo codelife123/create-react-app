@@ -83,6 +83,11 @@ const ComingSoon = () => {
     };
   });
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    console.log('form submitted');
+  };
+
   return (
     <Box
       minHeight={'calc(100vh - 64px - 183px)'}
@@ -192,7 +197,7 @@ const ComingSoon = () => {
                   <Typography>Secs</Typography>
                 </Box>
               </Box>
-              <form noValidate autoComplete="off">
+              <form onsubmit={handleFormSubmit} noValidate autoComplete="off">
                 <Box
                   display="flex"
                   flexDirection={{ xs: 'column', sm: 'column' }}
