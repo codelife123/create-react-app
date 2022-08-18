@@ -35,9 +35,8 @@ const ComingSoon = () => {
   console.log(errors);
 
   const onSubmit = (data) => {
-    const token = captchaRef.current.getValue();
-    console.log('form submitted' + token);
-    const url = 'https://e548-203-189-184-201.ngrok.io/waitingList';
+    const url = 'http://whoisalive.herokuapp.com/waitingList';
+    console.log(data.Email);
     const options = {
       method: 'POST',
       headers: {
@@ -52,6 +51,9 @@ const ComingSoon = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+      })
+      .catch((e) => {
+        console.log(e.getMessage());
       });
   };
 
@@ -123,13 +125,6 @@ const ComingSoon = () => {
                       pattern: /^\S+@\S+$/i,
                     })}
                   />
-
-                  <div>
-                    <RecaptchaView
-                      sitekey={'6LcRmG4hAAAAAFu7zOI-lpnsPm_-4nqSvKz8Am23'}
-                      ref={captchaRef}
-                    />
-                  </div>
 
                   <Box
                     component={Button}
