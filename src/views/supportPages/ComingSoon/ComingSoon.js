@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import PendingTime from './PendingTime';
 import { useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
+import { Box, Snackbar, Alert } from '@mui/material';
 import Button from '@mui/material/Button';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Typography from '@mui/material/Typography';
@@ -29,14 +29,21 @@ const ComingSoon = () => {
     formState: { errors },
   } = useForm();
 
-  const captchaRef = useRef(null);
+  const handleClick = () => {
+    setOpen(true);
+  };
 
-  // const [email, setEmail] = useState('');
-  console.log(errors);
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+  const [open, setOpen] = useState(false);
 
   const onSubmit = (data) => {
     const url = 'https://whoisalive.herokuapp.com/waitingList';
-    console.log(data.Email);
     const options = {
       method: 'POST',
       headers: {
@@ -50,6 +57,7 @@ const ComingSoon = () => {
     fetch(url, options)
       .then((response) => response.json())
       .then((data) => {
+        setOpen(true);
         console.log(data);
       })
       .catch((e) => {
@@ -152,6 +160,16 @@ const ComingSoon = () => {
                 </IconButton>
               </Box>
             </Box>
+
+            <Snackbar open={open} autoHideDuration={6000}>
+              <Alert
+                onClose={handleClose}
+                severity="success"
+                sx={{ width: '100%' }}
+              >
+                You are added to the waiting list!
+              </Alert>
+            </Snackbar>
           </Grid>
         </Grid>
       </Container>
