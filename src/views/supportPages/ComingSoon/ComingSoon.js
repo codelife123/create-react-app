@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import PendingTime from './PendingTime';
 import { useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -10,9 +11,11 @@ import IconButton from '@mui/material/IconButton';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import GitHubIcon from '@mui/icons-material/GitHub';
 import Container from '../../common/Container';
 import TeamWorkingIllustration from '../../svg/illustrations/TeamWorking';
+
+import { useForm } from 'react-hook-form';
+import { reCAPTCHA } from 'react-google-recaptcha';
 
 const ComingSoon = () => {
   const theme = useTheme();
@@ -20,72 +23,36 @@ const ComingSoon = () => {
     defaultMatches: true,
   });
 
-  const getDuration = (t0, t1) => {
-    let d = new Date(t1) - new Date(t0);
-    let weekdays = Math.floor(d / 1000 / 60 / 60 / 24 / 7);
-    let days = Math.floor(d / 1000 / 60 / 60 / 24 - weekdays * 7);
-    let hours = Math.floor(d / 1000 / 60 / 60 - weekdays * 7 * 24 - days * 24);
-    let minutes = Math.floor(
-      d / 1000 / 60 - weekdays * 7 * 24 * 60 - days * 24 * 60 - hours * 60
-    );
-    let seconds = Math.floor(
-      d / 1000 -
-        weekdays * 7 * 24 * 60 * 60 -
-        days * 24 * 60 * 60 -
-        hours * 60 * 60 -
-        minutes * 60
-    );
-    let milliseconds = Math.floor(
-      d -
-        weekdays * 7 * 24 * 60 * 60 * 1000 -
-        days * 24 * 60 * 60 * 1000 -
-        hours * 60 * 60 * 1000 -
-        minutes * 60 * 1000 -
-        seconds * 1000
-    );
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-    days = days + 7 * weekdays;
+  const captchaRef = useRef(null);
 
-    let t = {};
-    ['weekdays', 'days', 'hours', 'minutes', 'seconds', 'milliseconds'].forEach(
-      (q) => {
-        if (eval(q) > 0) {
-          t[q] = eval(q);
-        }
-      }
-    );
-    return t;
-  };
+  // const [email, setEmail] = useState('');
+  console.log(errors);
 
-  const estimateDate = '2022-10-01';
-  const gap = getDuration(new Date(), new Date(estimateDate));
-
-  const [days, setDays] = useState(gap['days']);
-  const [hours, setHours] = useState(gap['hours']);
-  const [minutes, setMinutes] = useState(gap['minutes']);
-  const [seconds, setSeconds] = useState(gap['seconds']);
-  useEffect(() => {
-    let myInterval = setInterval(() => {
-      if (seconds > 0) {
-        setSeconds(seconds - 1);
-      }
-      if (seconds === 0) {
-        if (minutes === 0) {
-          clearInterval(myInterval);
-        } else {
-          setMinutes(minutes - 1);
-          setSeconds(59);
-        }
-      }
-    }, 1000);
-    return () => {
-      clearInterval(myInterval);
+  const onSubmit = (data) => {
+    const token = captchaRef.current.getValue();
+    console.log('form submitted' + token);
+    const url = 'https://e548-203-189-184-201.ngrok.io/waitingList';
+    const options = {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      body: JSON.stringify({
+        email: data.Email,
+      }),
     };
-  });
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    console.log('form submitted');
+    fetch(url, options)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
   };
 
   return (
@@ -134,70 +101,8 @@ const ComingSoon = () => {
                 We'll be here soon with our new awesome site, subscribe to be
                 notified.
               </Typography>
-              <Box
-                display="flex"
-                flexDirection={'row'}
-                justifyContent={'space-around'}
-                marginY={2}
-              >
-                <Box
-                  display="flex"
-                  flexDirection={'column'}
-                  alignItems={'center'}
-                >
-                  <Typography
-                    variant={'h4'}
-                    sx={{ fontWeight: 700 }}
-                    color="primary"
-                  >
-                    {days}
-                  </Typography>
-                  <Typography>Days</Typography>
-                </Box>
-                <Box
-                  display="flex"
-                  flexDirection={'column'}
-                  alignItems={'center'}
-                >
-                  <Typography
-                    variant={'h4'}
-                    sx={{ fontWeight: 700 }}
-                    color="primary"
-                  >
-                    {hours}
-                  </Typography>
-                  <Typography>Hours</Typography>
-                </Box>
-                <Box
-                  display="flex"
-                  flexDirection={'column'}
-                  alignItems={'center'}
-                >
-                  <Typography
-                    variant={'h4'}
-                    sx={{ fontWeight: 700 }}
-                    color="primary"
-                  >
-                    {minutes}
-                  </Typography>
-                  <Typography>Mins</Typography>
-                </Box>
-                <Box
-                  display="flex"
-                  flexDirection={'column'}
-                  alignItems={'center'}
-                >
-                  <Typography
-                    variant={'h4'}
-                    sx={{ fontWeight: 700 }}
-                    color="primary"
-                  >
-                    {seconds}
-                  </Typography>
-                  <Typography>Secs</Typography>
-                </Box>
-              </Box>
-              <form onsubmit={handleFormSubmit} noValidate autoComplete="off">
+              <PendingTime />
+              <form noValidate autoComplete="off">
                 <Box
                   display="flex"
                   flexDirection={{ xs: 'column', sm: 'column' }}
@@ -212,7 +117,19 @@ const ComingSoon = () => {
                     fullWidth
                     height={54}
                     marginBottom={2}
+                    error={errors.Email != undefined}
+                    {...register('Email', {
+                      required: true,
+                      pattern: /^\S+@\S+$/i,
+                    })}
                   />
+
+                  <div>
+                    <RecaptchaView
+                      sitekey={'6LcRmG4hAAAAAFu7zOI-lpnsPm_-4nqSvKz8Am23'}
+                      ref={captchaRef}
+                    />
+                  </div>
 
                   <Box
                     component={Button}
@@ -222,6 +139,7 @@ const ComingSoon = () => {
                     height={54}
                     marginTop={{ xs: 2, sm: 2 }}
                     fullWidth
+                    onClick={handleSubmit(onSubmit)}
                   >
                     Subscribe
                   </Box>
