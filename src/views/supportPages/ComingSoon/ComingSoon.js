@@ -154,16 +154,25 @@ const ComingSoon = () => {
               <Box marginTop={2} display={'flex'} justifyContent={'center'}>
                 <IconButton
                   aria-label="facebook"
-                  href="https://google.com"
+                  href="https://facebook.com/whoisalive"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <FacebookIcon />
                 </IconButton>
-                <IconButton aria-label="twitter">
+                <IconButton aria-label="twitter" 
+                href="https://www.twitter.com/whoisalive_team"
+                target="_blank"
+                rel="noopener noreferrer"
+                >
                   <TwitterIcon />
                 </IconButton>
-                <IconButton aria-label="instagram">
+                <IconButton
+                  aria-label="instagram"
+                  href="https://www.instagram.com/whoisalive.team/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <InstagramIcon />
                 </IconButton>
               </Box>
