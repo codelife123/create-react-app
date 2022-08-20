@@ -152,7 +152,12 @@ const ComingSoon = () => {
                 </Box>
               </form>
               <Box marginTop={2} display={'flex'} justifyContent={'center'}>
-                <IconButton aria-label="facebook">
+                <IconButton
+                  aria-label="facebook"
+                  href="https://google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <FacebookIcon />
                 </IconButton>
                 <IconButton aria-label="twitter">
