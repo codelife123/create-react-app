@@ -39,7 +39,7 @@ const PendingTime = () => {
     );
     return t;
   };
-  const estimateDate = '2022-10-01';
+  const estimateDate = '2022-11-01';
   const gap = getDuration(new Date(), new Date(estimateDate));
 
   const [days, setDays] = useState(gap['days']);
